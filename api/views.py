@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from django.http import JsonResponse
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -21,7 +19,7 @@ def apiOverview(request):
 	return Response(api_urls)
 
 # get all or by id route
-@api_view(['GET'])
+@api_view(['GET',"POST","DELETE","PATCH"])
 def notes(request,pk=-1):
     if request.method == "GET":
         try:

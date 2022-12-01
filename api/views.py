@@ -19,7 +19,7 @@ def apiOverview(request):
 	return Response(api_urls)
 
 # get all or by id route
-@api_view(['GET',"POST","DELETE","PATCH"])
+@api_view(['GET',"POST","DELETE","PUT"])
 def notes(request,pk=-1):
     if request.method == "GET":
         try:
@@ -39,7 +39,7 @@ def notes(request,pk=-1):
             serializer.save()
         return Response(serializer.data)
         
-    if request.method == "PATCH":
+    if request.method == "PUT":
         note = Note.objects.get(id=pk)
         serializer = TaskSerializer(instance=note, data=request.data)
         if serializer.is_valid():

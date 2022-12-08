@@ -39,6 +39,7 @@ def notes(request,pk=-1):
         if serializer.is_valid():
             serializer.save()
         return Response(serializer.data)
+
     # update obj by id
     if request.method == "PUT":
         note = Note.objects.get(id=pk)
@@ -47,8 +48,12 @@ def notes(request,pk=-1):
             serializer.save()
         return Response(serializer.data)
     # delete obj by id
+
     if request.method == "DELETE":
-        note = Note.objects.get(id=pk)
-        note.delete()
+        try:
+            note = Note.objects.get(id=pk)
+            note.delete()
+        except:
+            return Response('Item was not found!')
         return Response('Item succsesfully delete!')
 

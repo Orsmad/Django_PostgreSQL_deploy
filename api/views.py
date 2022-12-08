@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import TaskSerializer
 
+# model import
 from .models import Note
 
 # urls route
@@ -11,16 +12,15 @@ def apiOverview(request):
 	api_urls = {
 		'notes':'/notes/',
 		'note':'/note/<str:pk>/',
-		'Create':'/add/',
-		'Update':'/update/<str:pk>/',
-		'Delete':'/delete/<str:pk>/'
+		'help': 'GET,POST,DELETE,PUT'
 		}
 
 	return Response(api_urls)
 
-# get all or by id route
+# main route all methods
 @api_view(['GET',"POST","DELETE","PUT"])
 def notes(request,pk=-1):
+    # get all or by id route
     if request.method == "GET":
         try:
             notes = Note.objects.get(id=pk)
@@ -30,53 +30,23 @@ def notes(request,pk=-1):
             notes = Note.objects.all().order_by('-id')
             serializer = TaskSerializer(notes, many=True)
             return Response(serializer.data)
-
+    # post method
     if request.method == "POST":
         serializer = TaskSerializer(data=request.data)
         print(request.data)
         if serializer.is_valid():
-            print("after")
             serializer.save()
         return Response(serializer.data)
-        
+    # update obj by id
     if request.method == "PUT":
         note = Note.objects.get(id=pk)
         serializer = TaskSerializer(instance=note, data=request.data)
         if serializer.is_valid():
             serializer.save()
         return Response(serializer.data)
-
+    # delete obj by id
     if request.method == "DELETE":
         note = Note.objects.get(id=pk)
         note.delete()
         return Response('Item succsesfully delete!')
 
-
-        
-# # add route
-# @api_view(['POST'])
-# def add(request):
-#     serializer = TaskSerializer(data=request.data)
-#     print(request.data)
-#     if serializer.is_valid():
-#         print("after")
-#         serializer.save()
-#     return Response(serializer.data)
-
-
-
-# # update route
-# @api_view(['PUT'])
-# def update(request, pk):
-#     note = Note.objects.get(id=pk)
-#     serializer = TaskSerializer(instance=note, data=request.data)
-#     if serializer.is_valid():
-#         serializer.save()
-#     return Response(serializer.data)
-
-# # delete route
-# @api_view(['DELETE'])
-# def delete(request, pk):
-# 	note = Note.objects.get(id=pk)
-# 	note.delete()
-# 	return Response('Item succsesfully delete!')

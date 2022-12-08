@@ -10,4 +10,7 @@ class Note(models.Model):
     upd_date = models.DateTimeField(auto_now=True)
     completed= models.BooleanField(default=False,null=True, blank=True,editable=True)
 
+    def __str__(self) -> str:
+        return self.title
+
  

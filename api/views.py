@@ -6,6 +6,8 @@ from .serializers import TaskSerializer
 # model import
 from .models import Note
 
+
+"""views"""
 # urls route
 @api_view(['GET'])
 def apiOverview(request):

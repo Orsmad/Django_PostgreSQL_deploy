@@ -32,6 +32,7 @@ def notes(request,pk=-1):
             notes = Note.objects.all().order_by('-id')
             serializer = TaskSerializer(notes, many=True)
             return Response(serializer.data)
+            
     # post method
     elif request.method == "POST":
         serializer = TaskSerializer(data=request.data)
@@ -47,8 +48,8 @@ def notes(request,pk=-1):
         if serializer.is_valid():
             serializer.save()
         return Response(serializer.data)
-    # delete obj by id
-
+   
+    # delede obj by id
     elif request.method == "DELETE":
         try:
             note = Note.objects.get(id=pk)

@@ -52,4 +52,4 @@ A REST api written in Django for people with deadlines
 https://notes-api-zkhw.onrender.com/api/notes/?format=json
 
 url to raw json
-acces the api by GET,POST,DELETE,PUT
+access the api by GET,POST,DELETE,PUT

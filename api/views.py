@@ -13,7 +13,7 @@ from .models import Note
 def apiOverview(request):
 	api_urls = {
 		'notes':'/notes/',
-		'note':'/note/<str:pk>/',
+		'note':'/notes/<str:pk>/',
 		'help': 'GET,POST,DELETE,PUT'
 		}
 
@@ -32,7 +32,7 @@ def notes(request,pk=-1):
             notes = Note.objects.all().order_by('-id')
             serializer = TaskSerializer(notes, many=True)
             return Response(serializer.data)
-            
+
     # post method
     elif request.method == "POST":
         serializer = TaskSerializer(data=request.data)

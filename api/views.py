@@ -33,7 +33,7 @@ def notes(request,pk=-1):
             serializer = TaskSerializer(notes, many=True)
             return Response(serializer.data)
     # post method
-    if request.method == "POST":
+    elif request.method == "POST":
         serializer = TaskSerializer(data=request.data)
         print(request.data)
         if serializer.is_valid():
@@ -41,7 +41,7 @@ def notes(request,pk=-1):
         return Response(serializer.data)
 
     # update obj by id
-    if request.method == "PUT":
+    elif request.method == "PUT":
         note = Note.objects.get(id=pk)
         serializer = TaskSerializer(instance=note, data=request.data)
         if serializer.is_valid():
@@ -49,7 +49,7 @@ def notes(request,pk=-1):
         return Response(serializer.data)
     # delete obj by id
 
-    if request.method == "DELETE":
+    elif request.method == "DELETE":
         try:
             note = Note.objects.get(id=pk)
             note.delete()

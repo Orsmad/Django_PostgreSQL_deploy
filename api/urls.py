@@ -7,5 +7,5 @@ urlpatterns = [
 
     # crud
 	path('notes/', views.notes),
-	path('notes/<pk>/', views.notes)
+	path('notes/<pk>', views.notes)
 ]

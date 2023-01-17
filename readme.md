@@ -49,7 +49,6 @@ A REST api written in Django for people with deadlines
 
 * #### deploy
 
-https://notes-api-zkhw.onrender.com/api/notes/
-
+********************************
 url to raw json
 access the api by GET,POST,DELETE,PUT
